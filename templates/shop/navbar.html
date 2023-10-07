@@ -1,0 +1,34 @@
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+
+<nav class="navbar">
+    <div class="logo">Fiarma Ecommerce</div>
+    <div class="nav-links">
+      <ul>
+        <li class="active"><a  href="{% url 'shop:shop' %}">Boutique </a></li>
+        <li>  <p id="total-panier">{{ nombre_article }}</p></li>
+
+        <li><a href="{% url 'shop:panier' %}"><img id="icon-panier" src="{% static 'images/panier.png' %}" alt=""></a></li>
+        <li><a  href="#">Categories</a></li>
+        <li><a  href="#">Deconnexion</a></li>
+        <li ><p class="action_btn" >{{ user }}</p></li> 
+
+      </ul>
+      <!--<a class="action_btn" >{{ user }}</a>   -->
+
+
+    </div>
+    <i class="fas fa-bars" ></i>
+</nav>
+
+
+<script>
+    const menuCouture= document.querySelector("i")
+    const navLinks = document.querySelector(".nav-links")
+
+    menuCouture.addEventListener('click',()=>{
+    navLinks.classList.toggle('mobile-menu')
+    })
+
+</script>

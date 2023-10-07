@@ -1,0 +1,145 @@
+* {
+    margin: 0px;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+body{
+    /*margin-top: -50px;*/
+    margin-top: -30px;
+
+}
+
+a{
+    color: rgb(8, 39, 68);
+}
+
+a:hover{
+    color: white;
+}
+
+
+.tout{
+    margin-top: 30px;
+}
+
+.heading {
+    display: flex;
+    background-color: #232f3e;
+    box-shadow: 0px 1px 2px #232f3e;
+
+}
+
+/*h1 {
+    color: coral;
+    font-weight: bold;
+    
+    background: transparent;
+    padding: 7px;
+    
+}
+
+.main{
+    justify-content: center;
+}*/
+
+.outer-wrapper {
+    margin: -5px;
+    /*margin-left: 400px;
+    margin-right: 250px;*/
+    margin: auto;
+
+    border: 1px solid black;
+    border-radius: 4px;
+    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.9);
+    max-width: fit-content;
+    max-height: fit-content;
+    background:rgba(62, 143, 98, 0.199);
+    justify-content: center;
+
+
+    
+}
+.table-wrapper {
+
+    overflow-y: scroll;
+    overflow-x: scroll;
+    height: fit-content;
+    max-height: 66.4vh;
+    
+    margin-top: 22px;
+    
+    margin: 15px;
+    padding-bottom: 20px;
+    
+}
+
+
+table {
+    
+    min-width: max-content;
+    
+    border-collapse: separate;
+    border-spacing: 0px;    
+    
+}
+
+
+
+table th{
+    position: sticky; 
+    top: 0px;
+    
+    /*background-color: #11da2c;*/
+    color: rgb(241, 245, 179);
+    
+    text-align: center;
+    font-weight: normal;
+    font-size: 18px;
+    outline: 0.7px solid black;
+    border: 1.5px solid black;
+
+} 
+
+
+
+table th, table td {
+    
+    padding: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+table td {
+    text-align: left;
+    
+    font-size: 15px;
+    border: 1px solid rgba(35, 8, 80, 0.192);
+    outline: 0.7px solid black;
+    border: 1.5px solid black;
+
+    padding-left: 20px;
+    
+  }
+
+  h1{
+    color: rgb(15, 14, 14);
+    font-weight: 30;
+    background: transparent;
+    padding: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    
+    
+  }
+
+  .commande{
+    padding: 0;
+    right: 10px;
+    justify-content: end;
+  }
+
+
+

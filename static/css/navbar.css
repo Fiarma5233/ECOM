@@ -1,0 +1,163 @@
+
+
+
+
+
+
+
+.error{
+    color: red;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+}
+
+/*
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+} */
+
+/*header{
+    height: 100vh;
+    width: 100vw;
+    background-size: cover;
+}*/
+
+.navbar{
+    background-color: #07240c;
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    align-items: center;
+    color: rgb(0, 4, 255);
+    margin-bottom: 50px;
+    margin-top: 0px;
+
+
+    /*margin: 30px;
+    padding: 60px;
+    list-style: none;
+    text-decoration: none;*/
+
+}
+
+.navbar a, p{
+    color: white;
+}
+
+.navbar a:hover{
+    color: orange;
+   
+    cursor: pointer;
+}
+
+.navbar .logo{
+    color: white;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+
+
+.navbar .nav-links ul{
+    display: flex;
+}
+
+.navbar .nav-links ul li{
+    margin: 0 25px;
+
+
+}
+
+/*.navbar .nav-links ul li.active a {
+    color: yellow;
+    font-weight: 600;
+
+    
+}*/
+
+.navbar i{
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 30px;
+    width: 35px;
+}
+
+
+.mobile-menu{
+    padding: 0;
+}
+
+@media screen and (max-width: 900px){
+    .navbar .logo{
+       position: absolute;
+
+       top: 40px;
+       left: 30px;
+    }
+    .navbar{
+        padding: 0;
+    }
+
+    .navbar i{
+        display: block;
+    }
+
+    .nav-links{
+        left: 0;
+        top: 0;
+        position: absolute;
+        /*background-color: rgba(20, 119, 64, 0.856);;
+        backdrop-filter: blur(7px);*/
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: -100%;
+        transition: all 0.5s ease;
+    }
+
+    .mobile-menu{
+        margin-left: 0;
+
+
+    }
+
+    *{
+        max-width: 100%;
+        max-width: 100%;
+    }
+    
+
+    .nav-links ul{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    .navbar .nav-links ul li{
+        margin: 5px 0;
+        font-size: 1.2rem;
+    
+    
+    }
+}
+
+
+/*body{
+    margin-top: -50px;
+}
+*/

@@ -1,0 +1,54 @@
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/listeCategorie.css' %}">
+
+
+
+
+<div class="tout" >
+    <h1>Categories</h1>
+        <div class="outer-wrapper">
+        <div class="table-wrapper">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th colspan="2">Actions</th>
+
+
+
+                </tr>
+            </thead>
+            {% for categorie in categories %}
+
+            <tbody>
+                <tr>
+                    <td>{{ categorie.name }}</td>
+                    <td>{{ categorie.description }}</a></td>
+                    <td>{{ categorie.date_ajout }}</td>
+                    <td><a href="{% url 'shop:modifierCategorie' categorie.id %}">Modifier</a></td>
+                    <td><a href="{% url 'shop:supprimerCategorie' categorie.id %}">Supprimer</a></td>
+
+
+
+
+                </tr>
+            {% endfor %}
+           </tbody>
+        </table>
+        </div>
+    </div>
+
+
+        
+{% endblock %}
+

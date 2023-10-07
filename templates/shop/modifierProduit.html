@@ -1,0 +1,298 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    <!--<form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Catégorie du produit</span>
+                <select name="categorie">
+                    {% for categorie in categories %}
+                        <option value="{{ categorie.id }}"
+                                {% if categorie.id ==    produit.categorie_id %}selected{% endif %}>
+                            {{ categorie.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="input-box">
+                <span class="details">Nom du produit</span>
+                <input type="text" name="name" value="{{ produit.name }}">
+                <strong class="error">{{ erreur1 }}</strong>
+            </div>
+
+            <div class="input-box">
+                <span class="details">Image</span>
+                <input type="file" name="image" value="{{produit.image }}">
+                <strong class="error">{{ erreur3 }}</strong>
+            </div>
+
+            <div class="input-box">
+                <span class="details">Nature du produit</span>
+                <select name="digital">
+                    <option value="True" {% if produit.digital %}selected{% endif %}>Produit digital</option>
+                    <option value="False" {% if not produit.digital %}selected{% endif %}>Produit physique</option>
+                </select>
+            </div>
+
+            <div class="input-box">
+                <span class="details">Prix</span>
+                <input type="number" name="price" value="{{ produit.price }}">
+                <strong class="error">{{ erreur2 }}</strong>
+            </div>
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Valider" id="sub" name="Update Passord">
+        </div>
+    </form>
+</div>-->
+
+
+
+
+    <!---<link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Catégorie du produit</span>
+                <select name="categorie">
+                    {% for categorie in categories %}
+                        <option value="{{ categorie.id }}" {% if categorie.id == produit.categorie.id %}selected{% endif %}>{{ categorie.name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nom du produit</span>
+                    <input type="text" name="name" value="{{ produit.name }}">
+                    <strong class="error">{{ erreur1 }}</strong>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Image actuelle</span>
+                    <img src="{{ produit.image.url }}" alt="{{ produit.name }}" width="100">
+                </div>
+                <div class="input-box">
+                    <span class="details">Nouvelle image</span>
+                    <input type="file" name="image">
+                    <strong class="error">{{ erreur3 }}</strong>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Nature du produit</span>
+                    <select name="digital">
+                        <option value="True" {% if produit.digital %}selected{% endif %}>Vrai</option>
+                        <option value="False" {% if not produit.digital %}selected{% endif %}>Faux</option>
+                    </select>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Prix</span>
+                    <input type="number" name="price" value="{{ produit.price }}">
+                    <strong class="error">{{ erreur2 }}</strong>    
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Valider" id="sub" name="Update Password"> 
+            </div>
+        </div>
+    </form>-->
+
+
+ 
+
+    <!--<link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Catégorie du produit</span>
+                <select name="categorie">
+                    {% for categorie in categories %}
+                        <option value="{{ categorie.id }}" {% if categorie.id == produit.categorie.id %}selected{% endif %}>{{ categorie.name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nom du produit</span>
+                    <input type="text" name="name" value="{{ produit.name }}">
+                    <strong class="error">{{ erreur1 }}</strong>    
+                </div>
+                {% if produit.image %}
+                <div class="input-box">
+                    <span class="details">Image actuelle</span>
+                    <a href="{{ produit.image.url }}" target="_blank">Lien vers l'image actuelle</a>
+                </div>
+                {% endif %}
+                <div class="input-box">
+                    <span class="details">Nouvelle image</span>
+                    <input type="file" name="image">
+                    <strong class="error">{{ erreur3 }}</strong>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Nature du produit</span>
+                    <select name="digital">
+                        <option value="True" {% if produit.digital %}selected{% endif %}>Vrai</option>
+                        <option value="False" {% if not produit.digital %}selected{% endif %}>Faux</option>
+                    </select>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Prix</span>
+                    <input type="number" name="price" value="{{ produit.price }}">
+                    <strong class="error">{{ erreur2 }}</strong>    
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Valider" id="sub" name="Update Password"> 
+            </div>
+        </div>
+    </form>-->
+
+
+    <link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+
+            <div class="input-box">
+                <span class="details">Catégorie du produit</span>
+                <select name="categorie">
+                    {% for categorie in categories %}
+                        <option value="{{ categorie.id }}" {% if categorie.id == produit.categorie.id %}selected{% endif %}>{{ categorie.name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nom du produit</span>
+                    <input type="text" name="name" value="{{ produit.name }}">
+                    <strong class="error">{{ erreur1 }}</strong>    
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Image actuelle</span>
+                    <a href="#" id="change-image-link"><img src="{{ produit.image.url }}" alt="Image actuelle du produit" id="current-image"></a>
+                    <input type="file" name="image" id="image-upload" style="display: none;">
+                    <strong class="error">{{ erreur3 }}</strong>    
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Stock</span>
+                    <input type="number" name="stock" value="{{ produit.stock }}" >
+                    <strong class="error">{{ erreur5 }}</strong>    
+                </div>
+    
+    
+                <div class="input-box">
+                    <span class="details">Description</span>
+                    <input type="text" name="description" value="{{ produit.description }}">
+                    <strong class="error">{{ erreur4 }}</strong>    
+                </div>
+
+
+                <div class="input-box">
+                    <span class="details">Nature du produit</span>
+                    <select name="digital">
+                        <option value="True" {% if produit.digital %}selected{% endif %}>Produit digital</option>
+                        <option value="False" {% if not produit.digital %}selected{% endif %}>Produit physique</option>
+                    </select>    
+                </div>
+
+                <div class="input-box">
+                    <span class="details">Prix</span>
+                    <input type="number" name="price" value="{{ produit.price }}">
+                    <strong class="error">{{ erreur2 }}</strong>    
+                </div>
+
+            </div>
+            <div class="button">
+                <input type="submit" value="Valider" id="sub" name="Update Password"> 
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('change-image-link').addEventListener('click', function() {
+            document.getElementById('image-upload').click();
+        });
+    </script>
+
+
+
+
+    <!--<link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Catégorie du produit</span>
+                <select name="categorie">
+                    {% for categorie in categories %}
+                        <option value="{{ categorie.id }}" {% if categorie.id == produit.categorie.id %}selected{% endif %}>{{ categorie.name }}</option>
+                    {% endfor %}
+                </select>    
+            </div>
+            <div class="user-details">
+                <div class="input-box">
+                    <span class="details">Nom du produit</span>
+                    <input type="text" name="name" value="{{ produit.name }}">
+                    <strong class="error">{{ erreur1 }}</strong>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Image actuelle</span>
+                    <a href="#" id="change-image-link">                                       <img src="{{ produit.image.url }}" alt="Image actuelle du produit" id="current-image">
+
+                    </a>
+
+                    <!-<label for="image-upload" id="change-image-label">Cliquez pour changer l'image</label>->
+                    <strong class="error">{{ erreur3 }}</strong>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Nature du produit</span>
+                    <select name="digital">
+                        <option value="True" {% if produit.digital %}selected{% endif %}>Vrai</option>
+                        <option value="False" {% if not produit.digital %}selected{% endif %}>Faux</option>
+                    </select>    
+                </div>
+                <div class="input-box">
+                    <span class="details">Prix</span>
+                    <input type="number" name="price" value="{{ produit.price }}">
+                    <strong class="error">{{ erreur2 }}</strong>    
+                </div>
+            </div>
+            <div class="button">
+                <input type="submit" value="Valider" id="sub" name="Update Password"> 
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('change-image-label').addEventListener('click', function() {
+            document.getElementById('image-upload').click();
+        });
+
+        document.getElementById('image-upload').addEventListener('change', function(event) {
+            const currentImage = document.getElementById('current-image');
+            const newImage = URL.createObjectURL(event.target.files[0]);
+            currentImage.src = newImage;
+        });
+    </script>-->
+
+
+
+
+
+    
+{% endblock %}

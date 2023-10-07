@@ -1,0 +1,80 @@
+
+
+{% extends 'base.html' %}
+{% block content %}    
+    
+{% load static %}
+
+<div style="margin-top: 10px;">
+    
+    
+    <link rel="stylesheet" href="{% static 'css/produit.css' %}">
+    
+    
+    
+    
+        
+    
+    
+      <div class="tout" >
+        <h1>Liste des produits</h1>
+    
+            <div class="outer-wrapper">
+    
+            <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th> Image </th>
+                        <th> Categorie</th>
+                        <th> Nom</th>
+                        <th> Description</th>
+                        <th> Stock</th>
+
+
+
+                        
+                        <th> Nature du produit</th>
+                        <th> Prix</th>
+                       
+                      
+                        <th colspan="2"> Actions</th>
+                        
+                    </tr>
+                </thead>
+                {% for produit in produits %}
+                
+                    <tbody>
+                        <tr>
+                            <td> <img class="row-image" src="{{ produit.imageUrl }}" alt=""></td>
+                            <td> {{ produit.categorie  }}</td>
+                            <td> {{ produit.name  }}</td>
+
+                            <td> {{ produit.description  }}</td>
+                            <td> {{ produit.stock  }}</td>
+
+
+                            
+                            <td> {{ produit.digital  }}</td>  
+                    
+                            <td> {{ produit.price  }}</td>
+                            
+                        
+        
+                            
+                            <td><a href="{% url 'shop:modifierProduit' produit.id %}">Modifier</a></td>
+                            <td><a href="{% url 'shop:supprimerProduit' produit.id %}">Supprimer</a></td>
+
+                        </tr>
+                    </tbody>
+                {% endfor %}
+                
+                
+
+             </table>
+        </div>
+    </div>
+    {% endblock %}
+    
+</div>
+

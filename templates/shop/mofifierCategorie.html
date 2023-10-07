@@ -1,0 +1,72 @@
+
+
+{% extends 'base.html' %}
+{% block content %}  
+    {% load static %}
+
+
+    <link rel="stylesheet" href="{% static 'css/Categorie.css' %}">
+
+    
+
+
+
+    <!--<div class="container">
+    <div class="title">Modifier cette categorie</div>
+    <form action="" method="post"  >
+
+        {% csrf_token %}
+
+
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Nom de la categorie</span>
+                <input type="text" name="name" id="name" value="{{ categorie.name }}">
+                <strong class="error">{{ erreur1 }}</strong>    
+            </div>
+
+            <div class="input-box">
+                <span class="details">Description</span>
+                <textarea  name="description" id="description" value="{{ categorie.description }}">{{ categorie.description }}</textarea>
+                <strong class="error">{{ erreur2 }}</strong>    
+            </div>
+
+        </div>
+
+        <div class="button">
+            <input  type="submit" value="Valider" id="sub" name="Update Passord"> 
+
+        </div>
+
+
+    </form>
+</div>-->
+
+
+<div class="container">
+    <div class="title">Modifier cette categorie</div>
+    <form action="" method="post">
+        {% csrf_token %}
+
+        <div class="user-details">
+            <div class="input-box">
+                <span class="details">Nom de la categorie</span>
+                <input type="text" name="name" id="name" value="{{ categorie.name }}">
+                <strong class="error">{{ erreur1 }}</strong>
+            </div>
+
+            <div class="input-box">
+                <span class="details">Description</span>
+                <textarea name="description" id="description">{{ categorie.description }}</textarea>
+                <strong class="error">{{ erreur2 }}</strong>
+            </div>
+        </div>
+
+        <div class="button">
+            <input type="submit" value="Valider" id="sub" name="Update Password">
+        </div>
+    </form>
+</div>
+
+    
+{% endblock %}

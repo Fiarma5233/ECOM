@@ -1,0 +1,327 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-lg-6">
+        <div class="box-element" id='form-wrapper'>
+
+            <form action="" id="form">
+                {% csrf_token %}
+                <div id="user-info">
+                    <p>Informations Personnelles:</p>
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="name" placeholder="Nom..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="username" placeholder="Prénom..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="phone" placeholder="Tel..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="email" class="form-control" name="email" placeholder="Email..." required>
+                    </div>
+                </div>
+
+                <div id="shipping-info">
+
+                    <hr>
+                    <p>Informations d'Expédition:</p>
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="address" placeholder="address..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="city" placeholder="Ville..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="state" placeholder="Pays..." required>
+                    </div>
+
+                    <div class="form-field">
+                        <input type="text" class="form-control" name="zipcode" placeholder="Zip code..." required>
+                    </div>
+                </div>
+
+                <hr>
+                <input id="form-button" class="btn w-100 btn-success btn-block" type="submit" value="Continuer"> 
+            </form>
+        </div>
+
+        <br>
+        <div class="box-element hidden" id="payment-info">
+            <small> Veuillez choisir le mode de paiement </small>
+            <center class="bg-info my-3"> <button onclick="checkout()"><img src="{% static 'images/cinet.png' %}" class="row-image" alt=""></button></center>
+            <div id="paypal-button-container"></div>
+
+            <!--<button class="btn w-100 btn-success btn-block" id="make-payment"> Effectuer le paiement</button>-->
+        </div>
+
+    </div>
+
+    <div class="col-lg-6">
+        <div class="box-element">
+            <a class="btn btn-outline-dark" href="{% url 'shop:panier' %}">&#x2190; Retour au panier </a>
+
+            <hr>
+            <h3>Recapitulatif de la commande</h3>
+            <hr>
+            {% for article in articles %}
+                <div class="panier-row">
+                    <div style="flex:2"><img class="row-image" src="{{ article.produit.imageUrl }}" alt=""></div>
+                    <div style="flex:2">{{ article.produit.name }}</div>
+                    <div style="flex:1">{{ article.produit.price }}</div>
+                    <div style="flex:1">{{ article.quantite }}</div>
+                </div>
+            {% endfor %}
+
+            <h5>Articles: {{ commande.get_panier_article }}</h5>
+            <h5>Total: {{commande.get_panier_total}}</h5>
+
+        </div>
+    </div>
+
+
+    <!--Include cinetpay-->
+    <script>
+
+        var total = parseFloat('{{commande.get_panier_total}}');
+        function checkout() {
+            CinetPay.setConfig({
+                apikey: '',//   YOUR APIKEY
+                site_id: '',//YOUR_SITE_ID
+                notify_url: 'http://mondomaine.com/notify/',
+                mode: 'TEST'
+            });
+            CinetPay.getCheckout({
+                transaction_id: Math.floor(Math.random() * 100000000).toString(), // YOUR TRANSACTION ID
+                amount: total,
+                currency: 'XOF',
+                channels: 'ALL',
+                description: 'Fiarma LAndry SOME e-commerce',   
+                 //Fournir ces variables pour le paiements par carte bancaire
+                customer_name:"Joe",//Le nom du client
+                customer_surname:"Down",//Le prenom du client
+                customer_email: "down@test.com",//l'email du client
+                customer_phone_number: "088767611",//l'email du client
+                customer_address : "BP 0024",//addresse du client
+                customer_city: "Antananarivo",// La ville du client
+                customer_country : "CM",// le code ISO du pays
+                customer_state : "CM",// le code ISO l'état
+                customer_zip_code : "06510", // code postal
+
+            });
+            CinetPay.waitResponse(function(data) {
+                submitFormData(data.operator_id, data.status)
+            });
+            CinetPay.onError(function(data) {
+                console.log(data);
+            });
+        }
+    </script>
+
+     <!-- Include the PayPal JavaScript SDK -->
+    <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+
+
+
+    <script>
+        // Render the PayPal button into #paypal-button-container
+        var total = parseFloat('{{ commande.get_panier_total }}').toFixed(2);
+        paypal.Buttons({
+
+
+            style: {
+                color:  'blue',
+                shape:  'pill',
+                label:  'pay',
+                height: 40
+            },
+
+            // Call your server to set up the transaction
+            /*createOrder: function(data, actions) {
+                return fetch('/demo/checkout/api/paypal/order/create/', {
+                    method: 'post'
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(orderData) {
+                    return orderData.id;
+                });
+            },*/
+
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units:[{
+                        amount:{
+                            value:total
+                        }
+                    }]
+                })
+            },
+
+            // Call your server to finalize the transaction
+            /*onApprove: function(data, actions) {
+                return fetch('/demo/checkout/api/paypal/order/' + data.orderID + '/capture/', {
+                    method: 'post'
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(orderData) {
+                    // Three cases to handle:
+                    //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
+                    //   (2) Other non-recoverable errors -> Show a failure message
+                    //   (3) Successful transaction -> Show confirmation or thank you
+
+                    // This example reads a v2/checkout/orders capture response, propagated from the server
+                    // You could use a different API or structure for your 'orderData'
+                    var errorDetail = Array.isArray(orderData.details) && orderData.details[0];
+
+                    if (errorDetail && errorDetail.issue === 'INSTRUMENT_DECLINED') {
+                        return actions.restart(); // Recoverable state, per:
+                         return alert(msg); // Show a failure message (try to avoid alerts in production environments)
+                       // https://developer.paypal.com/docs/checkout/integration-features/funding-failure/
+                    }
+
+                    if (errorDetail) {
+                        var msg = 'Sorry, your transaction could not be processed.';
+                        if (errorDetail.description) msg += '\n\n' + errorDetail.description;
+                        if (orderData.debug_id) msg += ' (' + orderData.debug_id + ')';
+                    }*/
+
+            onApprove: function(data, actions) {
+                return actions.order.capture().then(function(orderData){
+                
+
+                    // Successful capture! For demo purposes:
+                    console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+                    var transaction = orderData.purchase_units[0].payments.captures[0];
+                    //alert('Transaction '+ transaction.status + ': ' + transaction.id + '\n\nSee console for all available details');
+                    submitFormData(transaction.id,  transaction.status);
+
+                    // Replace the above to show a success message within this page, e.g.
+                    // const element = document.getElementById('paypal-button-container');
+                    // element.innerHTML = '';
+                    // element.innerHTML = '<h3>Thank you for your payment!</h3>';
+                    // Or go to another URL:  actions.redirect('thank_you.html');
+                });
+            }
+
+        }).render('#paypal-button-container');
+    </script>
+
+
+    <script type="text/javascript">
+
+        var total = parseFloat('{{commande.get_panier_total}}');
+        var produitPhysique = "{{ commande.produit_physique }}" ;// On recupere la commande pour voir s'il ya un produit physique ou pas
+
+        // ici, on verifie  que tous les produits sonts digitaux
+        if (produitPhysique == "False" ) {  
+            document.getElementById('shipping-info').innerHTML = ''; // ici, on va lui cacher les informations d'expeditions vue qu'il n'a pas de produit physique
+        }
+
+        
+
+        if (user != "AnonymousUser"){  // Au cas ou l'utilisateur est authentifier
+            document.getElementById('user-info').innerHTML = ''; // On cache les infos personnelles de l'utilisateur authentifier
+
+        }
+
+        if ( produitPhysique == 'False' && user != "AnonymousUser" ){ // si l'utilisateur est authentifie et n'a pas de produits physiques
+            document.getElementById('form-wrapper').innerHTML =''; // on lui cache tout le formulaire
+            document.getElementById('payment-info').classList.remove('hidden') ; //  et on lui montre les differents modes de paiement 
+
+
+        }
+
+        /* 
+            Lorsque l'utilisateur remplit le formulaire et click sur continuer, on veut lui presenter les differents modes de paiement
+
+        */
+
+        var form = document.getElementById('form');
+        //var csrftoken = form.getElementsByTagName('input')[0].value;
+        //console.log('Newtoken', form.getElementsByTagName('input')[0].value);
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();  // Notre page ne se recharge pas
+            console.log("donnees en cours......");
+            document.getElementById('form-button').classList.add('hidden');  // on cache le bouton continuer
+            document.getElementById('payment-info').classList.remove('hidden'); // on affiche les methodes de paiement
+        })
+
+        //document.getElementById('make-payment').addEventListener('click', function(e) {
+            //submitFormData() ;  // cette fonction permet  d'envoyer des donnees 
+       // })
+
+        function submitFormData(transaction_id, status){
+            console.log("Traitement de la commande en cours......");
+            var paymentInfo = {
+                "transaction_id":transaction_id,
+                "status":status,
+                "total":total
+            }
+            var userFormData = {
+                'name':null,
+                'username':null,
+                'phone': null,
+                'email': null,
+                'total': total,
+            }
+
+            var shippingUserInfo = {
+                'address':null,
+                'city':null,
+                'state':null,
+                'zipcode':null,
+            }
+
+            if (produitPhysique != "False"){ // s'il ya au moins un produit physique dans la commande
+                // on recuperes la valeur de chaque du formulaire des infos d'expedition
+                shippingUserInfo.address = form.address.value; 
+                shippingUserInfo.city = form.city.value;
+                shippingUserInfo.state = form.state.value;
+                shippingUserInfo.zipcode = form.zipcode.value;
+            }
+
+            if (user == "AnonymousUser"){
+                userFormData.name = form.name.value;
+                userFormData.username = form.username.value;
+                userFormData.phone = form.phone.value;
+                userFormData.email = form.email.value;
+            }
+
+            var url = '/traitement_commande/';
+
+            fetch(url, {
+                method:"POST",
+                headers:{
+                    "Content-Type": 'application/json',
+                    'X-CSRFToken': csrftoken
+                },
+                body:JSON.stringify({'form': userFormData, 'shipping': shippingUserInfo, "payment_info": paymentInfo})
+            })
+
+            .then((response) =>{
+                return response.json;
+            })
+
+            .then((data) =>{
+                Swal.fire({icon:"success", text:data}).then(result =>{
+                    window.location.href = '{% url "shop:shop" %}';// Redirection de l'utilisateur vers la page d'accueil
+
+                })
+                panier = {};
+                document.cookie = "panier=" + JSON.stringify(panier) + ";domain=;path=/";
+
+            })
+        }
+
+        
+    </script>
+{% endblock content %}
