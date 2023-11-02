@@ -493,3 +493,10 @@ def modifierProduit(request, produit_id):
           return render(request, 'shop/modifierProduit.html', {'categories': categories, 'data': data})
 
      return render(request, 'shop/modifierProduit.html', {'categories': categories, 'erreur1': erreur1, 'erreur2': erreur2, 'erreur3': erreur3, 'data': data})'''
+
+# Voir les details du produit si on clique sur voir
+
+def voir(request, produit_id):
+     produits = Produit.objects.get(id=produit_id)
+     detail ={'produits': produits}
+     return render(request, 'shop/voir.html', detail)

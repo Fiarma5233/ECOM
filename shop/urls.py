@@ -32,6 +32,9 @@ urlpatterns = [
 
     path('modifierProduit/<int:produit_id>/', views.modifierProduit, name="modifierProduit"),
 
+    path('detail/<int:produit_id>/', views.voir, name="voir"),
+
+
 
 
 

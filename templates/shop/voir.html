@@ -1,0 +1,30 @@
+
+
+
+
+
+{% extends 'base.html' %}
+{% block content %}    
+    
+{% load static %}
+
+<center>
+<h1>Detail du produit {{ produits.name }}</h1>
+<br>
+<br>
+
+</center>
+
+
+<center>
+    <div>{{ produits.description }}</div>
+    <br>
+    
+    <div>Prix :  {{ produits.price }}</div>
+
+    <div>Stock disponible :  {{ produits.stock }}</div>
+</center>
+
+{% endblock %}
+    
+
